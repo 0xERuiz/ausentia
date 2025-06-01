@@ -2,6 +2,7 @@ package com.ericruiz.ausentia.cli;
 
 import com.ericruiz.ausentia.model.Trabajador;
 import com.ericruiz.ausentia.model.Vacacion;
+import com.ericruiz.ausentia.service.TrabajadorService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,18 +13,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CliHandler {
-    private List<Trabajador> trabajadores = new ArrayList<>();
-
     public CliHandler() {
     }
-
     public int leerEnteroValido(Scanner input) {
         int numero;
         while (true) {
             String linea = input.nextLine();
             try {
                 numero = Integer.parseInt(linea);
-                return numero; // Salimos con valor válido
+                return numero;
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida, por favor introduce un número entero válido.");
             }
@@ -32,6 +30,7 @@ public class CliHandler {
 
 
     public void start() {
+        TrabajadorService trabajadores = new TrabajadorService();
         Scanner input = new Scanner(System.in);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate fechaContrato;
@@ -58,36 +57,30 @@ public class CliHandler {
                         System.out.println("Fecha inválida");
                         break;
                     }
-                    trabajadores.add(new Trabajador(nombre, fechaContrato));
+                    trabajadores.addTrabajador(nombre, fechaContrato);
                     System.out.println("Trabajador creado");
                     break;
                 }
                 case "e": {
-                    for (Trabajador trabajador : trabajadores) {
+                    for (Trabajador trabajador : trabajadores.getTrabajadores()) {
                         System.out.println(trabajador.toString());
                     }
                     System.out.println("ID del trabajador a eliminar: ");
                     int id = leerEnteroValido(input);
                     boolean encontrado = false;
-                    for (Trabajador trabajador : trabajadores) {
-                        if (id == trabajador.getId()) {
-                            encontrado = true;
-                            trabajadores.remove(trabajador);
-                            System.out.println("Trabajador eliminado");
-                            break;
-                        }
+                    if(!trabajadores.removeTrabajador(id)) {
+                        System.out.println("Trabajador no econtrado");
+                    } else {
+                        System.out.println("Trabajador eliminado");
                     }
-                    if (!encontrado) System.out.println("Trabajador no econtrado");
                     break;
                 }
                 case "v": {
-                    for (Trabajador trabajador : trabajadores) {
-                        System.out.println(trabajador.toString());
-                    }
+                    System.out.println(trabajadores.toString());
                     System.out.println("ID del trabajador: ");
                     int id = leerEnteroValido(input);
                     boolean encontrado = false;
-                    for (Trabajador trabajador : trabajadores) {
+                    for (Trabajador trabajador : trabajadores.getTrabajadores()) {
                         if (id == trabajador.getId()) {
                             encontrado = true;
                             boolean running2 = true;
