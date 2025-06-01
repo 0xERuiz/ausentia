@@ -57,6 +57,10 @@ public class Trabajador {
         return diasVacaciones - diasUsados;
     }
 
+    public LocalDate getFechaContrato() {
+        return this.fechaContrato;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

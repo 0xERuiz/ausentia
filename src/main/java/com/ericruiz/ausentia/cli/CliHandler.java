@@ -108,6 +108,25 @@ public class CliHandler {
                                             break;
                                         }
 
+                                        if (fechaInicio.isBefore(trabajador.getFechaContrato())) {
+                                            System.out.println("Las vacaciones no pueden comenzar antes de la fecha de contratación");
+                                            break;
+                                        }
+
+                                        boolean solapan = false;
+                                        for (Vacacion vacacion : trabajador.getVacaciones()) {
+                                            LocalDate inicioExistente = vacacion.getFechaInicio();
+                                            LocalDate finExistente = vacacion.getFechaFin();
+                                            if (!(fechaFinal.isBefore(inicioExistente) || fechaInicio.isAfter(finExistente))) {
+                                                solapan = true;
+                                                break;
+                                            }
+                                        }
+                                        if (solapan) {
+                                            System.out.println("Las fechas se solapan con vacaciones ya existentes");
+                                            break;
+                                        }
+
                                         if (ChronoUnit.DAYS.between(fechaInicio, fechaFinal) > trabajador.getVacacionesDisponibles()) {
                                             System.out.println("Ha escogido más días de los disponibles");
                                             break;
