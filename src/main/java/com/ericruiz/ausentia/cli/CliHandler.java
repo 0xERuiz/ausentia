@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -67,7 +66,6 @@ public class CliHandler {
                     }
                     System.out.println("ID del trabajador a eliminar: ");
                     int id = leerEnteroValido(input);
-                    boolean encontrado = false;
                     if(!trabajadores.removeTrabajador(id)) {
                         System.out.println("Trabajador no econtrado");
                     } else {
@@ -76,7 +74,7 @@ public class CliHandler {
                     break;
                 }
                 case "v": {
-                    System.out.println(trabajadores.toString());
+                    System.out.println(trabajadores);
                     System.out.println("ID del trabajador: ");
                     int id = leerEnteroValido(input);
                     boolean encontrado = false;
