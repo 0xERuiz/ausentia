@@ -1,9 +1,26 @@
+# Directorios de compilación
 target/
 
+# Archivos de IntelliJ IDEA
 *.iml
+.idea/
 
+# Configuraciones del workspace Eclipse/VSCode
 .project
-
 .vscode/
 
+# Archivos de sistema macOS
 .DS_Store
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Archivos generados por Maven
+*.class
+
+# Otros
+out/
