@@ -28,11 +28,6 @@ public class Trabajador {
         this.diasVacaciones = (int) (1.5 * trabajado);
     }
 
-    public Trabajador() {
-        this.id = generateId();
-        this.vacaciones = new ArrayList<>();
-    }
-
     public int getId() {
         return this.id;
     }
@@ -74,10 +69,14 @@ public class Trabajador {
     }
 
     public String toString() {
-        return "Trabajador " + this.id + " - " + this.nombre + " - " + this.fechaContrato + " - " + this.diasVacaciones + " dias de vacaciones";
+        return "Trabajador " + this.id + " - " + this.nombre +
+                " | Fecha contrato: " + this.fechaContrato +
+                " | Vacaciones: " + this.diasVacaciones +
+                " | Disponibles: " + this.getVacacionesDisponibles();
+
     }
 
-    private int generateId() {
+    private static synchronized int generateId() {
         return ++nextId;
     }
 }

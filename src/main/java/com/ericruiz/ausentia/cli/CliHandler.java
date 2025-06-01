@@ -127,7 +127,7 @@ public class CliHandler {
                                             break;
                                         }
 
-                                        if (ChronoUnit.DAYS.between(fechaInicio, fechaFinal) > trabajador.getVacacionesDisponibles()) {
+                                        if ((ChronoUnit.DAYS.between(fechaInicio, fechaFinal) + 1) > trabajador.getVacacionesDisponibles()) {
                                             System.out.println("Ha escogido más días de los disponibles");
                                             break;
                                         }
@@ -139,9 +139,15 @@ public class CliHandler {
                                     }
                                     case "v": {
                                         List<Vacacion> arrayVacaciones = trabajador.getVacaciones();
-                                        for (Vacacion vacacion : arrayVacaciones) {
-                                            System.out.println(vacacion.toString());
+                                        System.out.println("Vacaciones registradas:");
+                                        if (arrayVacaciones.isEmpty()) {
+                                            System.out.println("No hay vacaciones registradas.");
+                                        } else {
+                                            for (Vacacion vacacion : arrayVacaciones) {
+                                                System.out.println(vacacion.toString());
+                                            }
                                         }
+                                        System.out.println("Días disponibles: " + trabajador.getVacacionesDisponibles());
                                         break;
                                     }
                                     case "e": {
