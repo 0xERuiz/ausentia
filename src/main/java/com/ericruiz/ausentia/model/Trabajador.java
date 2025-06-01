@@ -3,11 +3,12 @@ package com.ericruiz.ausentia.model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Trabajador {
     private final int id;
     private String nombre;
-    private ArrayList<Vacacion> vacaciones;
+    private List<Vacacion> vacaciones = new ArrayList<>();
     private static int nextId = 0;
     private enum tipoContrato {
         TEMPORAL,
@@ -40,7 +41,7 @@ public class Trabajador {
         return this.nombre;
     }
 
-    public ArrayList<Vacacion> getVacaciones() {
+    public List<Vacacion> getVacaciones() {
         return this.vacaciones;
     }
 

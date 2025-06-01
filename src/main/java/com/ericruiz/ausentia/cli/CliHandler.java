@@ -8,10 +8,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CliHandler {
-    private ArrayList<Trabajador> trabajadores = new ArrayList<>();
+    private List<Trabajador> trabajadores = new ArrayList<>();
 
     public CliHandler() {
     }
@@ -44,13 +45,13 @@ public class CliHandler {
             String command = input.nextLine();
             switch (command) {
                 case "c": {
-                    System.out.println("Nombre: ");
+                    System.out.print("Nombre: ");
                     String nombre = input.nextLine();
                     if (nombre.isEmpty()) {
                         System.out.println("El nombre no puede estar vacío");
                         break;
                     }
-                    System.out.println("Fecha contrato: ");
+                    System.out.print("Fecha contrato: ");
                     try {
                         fechaContrato = LocalDate.parse(input.nextLine(), formatter);
                     } catch (DateTimeParseException e) {
@@ -127,7 +128,7 @@ public class CliHandler {
 
                                     }
                                     case "v": {
-                                        ArrayList<Vacacion> arrayVacaciones = trabajador.getVacaciones();
+                                        List<Vacacion> arrayVacaciones = trabajador.getVacaciones();
                                         for (Vacacion vacacion : arrayVacaciones) {
                                             System.out.println(vacacion.toString());
                                         }
@@ -142,9 +143,9 @@ public class CliHandler {
                                             System.out.println("Fecha inválida: " + e.getMessage());
                                             break;
                                         }
-                                        ArrayList<Vacacion> arrayVacacciones = trabajador.getVacaciones();
+                                        List<Vacacion> listaVacaciones = trabajador.getVacaciones();
                                         boolean encontradas = false;
-                                        for (Vacacion vacacion : arrayVacacciones) {
+                                        for (Vacacion vacacion : listaVacaciones) {
                                             if (vacacion.getFechaInicio().equals(fechaInicio)) {
                                                 trabajador.removeVacacion(vacacion);
                                                 encontradas = true;
