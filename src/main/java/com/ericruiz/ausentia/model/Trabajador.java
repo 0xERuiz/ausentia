@@ -8,7 +8,7 @@ import java.util.List;
 public class Trabajador {
     private final int id;
     private String nombre;
-    private List<Vacacion> vacaciones = new ArrayList<>();
+    private List<Vacacion> vacaciones;
     private static int nextId = 0;
     private enum tipoContrato {
         TEMPORAL,
