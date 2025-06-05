@@ -25,7 +25,7 @@ public class Trabajador {
         this.fechaContrato = fechaContrato;
         this.vacaciones = new ArrayList<>();
         long trabajado = ChronoUnit.MONTHS.between(fechaContrato, LocalDate.now());
-        this.diasVacaciones = (int) (1.5 * trabajado);
+        this.diasVacaciones = (int) (1.8333 * trabajado);
     }
 
     public int getId() {
@@ -45,11 +45,15 @@ public class Trabajador {
     }
 
     public int getVacacionesDisponibles() {
-        int diasUsados = 0;
+        return diasVacaciones - getDiasSolicitados();
+    }
+
+    public int getDiasSolicitados() {
+        int diasSolicitados = 0;
         for(Vacacion vacacion : this.vacaciones) {
-            diasUsados += 1 + (int) ChronoUnit.DAYS.between(vacacion.getFechaInicio(), vacacion.getFechaFin());
+            diasSolicitados += 1 + (int) ChronoUnit.DAYS.between(vacacion.getFechaInicio(), vacacion.getFechaFin());
         }
-        return diasVacaciones - diasUsados;
+        return diasSolicitados;
     }
 
     public LocalDate getFechaContrato() {
