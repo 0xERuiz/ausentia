@@ -38,7 +38,7 @@ public class InputHelper {
         while (true) {
             try {
                 linea = input.nextLine().trim();
-                if(linea.equals("")) {
+                if(linea.isEmpty()) {
                     System.out.println("La entrada no puede estar vacía. Intenta de nuevo.");
                     continue;
                 }
